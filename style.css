@@ -51,3 +51,28 @@ body{
     flex-direction: row;
     gap:2px;
 }
+
+#popup{
+    position:fixed;
+    align-items: center;
+    justify-content: space-around;
+    display: none;
+    z-index: 10;
+    background-color: blue;
+    min-height: 40vh;
+    min-width: 60vw;
+    height: fit-content;
+    width: fit-content;
+    flex-direction: column;
+    color: whitesmoke;
+    font-weight: bold;
+    font-size: 30px;
+    inset: 0;
+}
+
+#test{
+    position:fixed;
+    top: 50vh;
+    left: 50vw;
+
+}
