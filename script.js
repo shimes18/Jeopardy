@@ -62,7 +62,9 @@ document.getElementById("questions").addEventListener("click",async function(e){
         await image();
         question.innerHTML="";
     }
-
+    else if (cat_name==5){
+        await nickname();
+    }
 })
 
 const image_char_id=0,image_char="";
@@ -98,3 +100,45 @@ async function image(){
     qimg.src = image_char;
 }
 
+async function nickname(){
+    const res= await fetch("https://api.tenrai.org/v1/characters?page=" + page);
+    const json = await res.json();
+    const image_char_id= json.data[Math.floor(Math.random()*25)].mal_id;
+
+    const res2 = await fetch(`https://api.tenrai.org/v1/characters/${image_char_id}`);
+    const json2 = await res2.json();
+    const nicknames_char = json2.data.nicknames ;
+    if (nicknames_char.length==0){
+        nickname();
+    }
+    anime= json2.data.name;
+
+    console.log(nicknames_char);
+    console.log(anime);
+    question.innerHTML = nicknames_char;
+}
+
+function submitbtn(){
+    answer=document.getElementById("ans").value;
+    
+    if (fuzzball.WRatio(answer,anime) > 80){
+        alert("correct answer");
+    }
+    else{
+        alert("incorrect answer");
+    }
+
+    console.log(answer + " anime is : " + anime);
+    qimg.src='';
+    question.innerHTML="";
+    document.getElementById("popup").style.display="none";
+    document.getElementById("main").style.opacity="1";
+    document.getElementById(selected).innerHTML = anime ;
+}
+
+document.getElementById("ans").addEventListener("keypress", function(event){
+    if (event.key== "Enter"){
+        event.preventDefault();
+        submitbtn();
+    }
+});
