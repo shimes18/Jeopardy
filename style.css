@@ -41,7 +41,7 @@ body{
     align-items: center;
     justify-content: center;
     font-weight: bold;
-    font-size: clamp(20px , 30px , 30px);
+    font-size: clamp(10px , 30px , 30px);
     border: 0px;
 }
 

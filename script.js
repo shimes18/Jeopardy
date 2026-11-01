@@ -8,7 +8,7 @@ for (let i=1;i<=5;i++){
 
 const character_ques= ['hello','hi'],location_ques=['fa','soul society'],stand_ques=['hermit purple', 'tusk'],title_ques=['honored one', 'hope of the universe'];
 
-const quote_ques = ['Naruto','Bleach','One Piece', 'Fullmetal Alchemist','Black Clover','Hunter X Hunter','Monster', 'Death Note','Steins;Gate' , 'Chainsaw Man', 'Evangelion' ]
+const quote_ques = ['Naruto','Bleach','One Piece','Black Clover','Jujutsu Kaisen','Hunter X Hunter', 'Attack on titan' ,'Jojo',  'Chainsaw Man','Vinland Saga' ,'Demon slayer' , 'Fullmetal Alchemist','Fullmetal Alchemist Brotherhood' ,'Death Note','Your Lie in April','Monster','Steins;Gate' , 'Evangelion' ,'lain','Berserk','one punch man', 'Spirited Away','Rascal Does Not Dream of Bunny Girl Senpai', 'FLCL'  ]
 
 const categories = [character_ques,location_ques,quote_ques,stand_ques,title_ques]
 
