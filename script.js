@@ -85,6 +85,9 @@ document.getElementById("questions").addEventListener("click",async function pop
     else if (cat_name==4){
         await jojo();
     }
+    else if(cat_name==2){
+        await description();
+    }
 })
 
 const image_char_id=0,image_char="";
@@ -164,6 +167,31 @@ async function jojo(){
     document.getElementById("from").innerHTML = "The Stand User is";
     document.getElementById("ans").placeholder = "Stand Name"
     console.log(anime + stand_name);
+}
+
+async function description(){
+    const res= await fetch("https://api.tenrai.org/v1/characters?page=" + page);
+    const json = await res.json();
+    const desc_char_id= json.data[Math.floor(Math.random()*25)].mal_id;
+
+    const res2 = await fetch(`https://api.tenrai.org/v1/characters/${desc_char_id}`);
+    const json2 = await res2.json();
+    const full_desc_char = json2.data.about;
+    anime= json2.data.name;
+
+    const descs = full_desc_char.split(".").filter(Boolean);
+    const change = anime.split(",").filter(Boolean);
+    var chosen_desc= descs[Math.floor(Math.random()*descs.length)].replaceAll(change[0]," [NAME]");
+    chosen_desc= chosen_desc.replaceAll(change[1]," [NAME]");
+
+
+
+    console.log(full_desc_char);
+    console.log(anime);
+    console.log(chosen_desc);
+    question.innerHTML = chosen_desc;
+    document.getElementById("from").innerHTML = "The character's name is ";
+    document.getElementById("ans").placeholder = "Character Name"
 }
 
 function change(){
