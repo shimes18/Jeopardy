@@ -8,7 +8,9 @@ for (let i=1;i<=5;i++){
 
 
 var current_turn = Number(localStorage.getItem("player_no")) || 1;
-var point = JSON.parse(localStorage.getItem("point")) || [0,0,0]
+var point = JSON.parse(localStorage.getItem("previouspoints")) || [0,0,0]
+
+var player_no=current_turn;
 
 document.getElementById("player1").innerHTML = "Player 1: " + point[1];
 document.getElementById("player2").innerHTML = "Player 2: " + point[2];
@@ -30,18 +32,23 @@ var selected='';
 var already_clicked=[];
 
 
+
 document.getElementById("questions").addEventListener("click",async function popuprun(e){
     const ques= e.target.closest('.cque');
     document.getElementById("questions").style.pointerEvents = "none";
 
-    selected= ques.id;
-    already_clicked.push(selected);
 
-    for (let checkclick=0;checkclick<(already_clicked.length-1);checkclick++){
+    selected= ques.id;
+
+    for (let checkclick=0;checkclick<=(already_clicked.length-1);checkclick++){
         if (already_clicked[checkclick]==selected){
+            document.getElementById("questions").style.pointerEvents = "auto";
             return;
         }
     }
+
+
+    already_clicked.push(selected);
 
     document.getElementById("popup").style.display="flex"
 
@@ -191,6 +198,8 @@ function submitbtn(){
             player_no=current_turn;
             change();
         }
+
+
             document.getElementById("retry").style.display= "none";
             document.getElementById("retry").innerHTML= "Player " + player_no + " retry";
             document.getElementById("pass").style.display = "none";
@@ -210,13 +219,17 @@ function submitbtn(){
     console.log(cat_difficulty);
 
     if (already_clicked.length==25){
-        if (player_no==1){
-        localStorage.setItem("previouspoints",JSON.stringify(point));
-        localStorage.setItem("player_no",2);
-        location.reload;
+        if (current_turn==1){
+            localStorage.setItem("previouspoints",JSON.stringify(point));
+            localStorage.setItem("player_no", 2);
+            window.location.href=window.location.href;
+        }
+        else{
+            alert("END");
+            localStorage.clear();
+        }
     }
-
-
+    console.log(current_turn);
 }
 
 document.getElementById("ans").addEventListener("keypress", function(event){
