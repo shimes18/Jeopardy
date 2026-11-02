@@ -5,32 +5,32 @@ for (let i=1;i<=5;i++){
     document.getElementById(`c${i}q${j}`).innerHTML = j*200;
     }
 }
+
 var player_no=1;
+var current_turn=1;
 
-var point1=0;
-var point2=0;
+var point = [0,0,0];
 
-document.getElementById("player1").innerHTML = "Player 1: " + point1;
-document.getElementById("player2").innerHTML = "Player 2: " + point2;
+document.getElementById("player1").innerHTML = "Player 1: " + point[1];
+document.getElementById("player2").innerHTML = "Player 2: " + point[2];
 
 document.getElementById("playerturn").innerHTML = "Player " + player_no + " turn";
 
 const character_ques= [],location_ques=[],stand_ques=[],title_ques=[];
 
-const quote_ques = ['Naruto','Bleach','One Piece','Black Clover','Jujutsu Kaisen','Hunter X Hunter', 'Attack on titan' ,'Jojo',  'Chainsaw Man','Vinland Saga' ,'Demon slayer' , 'Fullmetal Alchemist','Fullmetal Alchemist Brotherhood' ,'Death Note','Your Lie in April','Monster','Steins;Gate' , 'Evangelion' ,'lain','Berserk','one punch man', 'Spirited Away','Samurai Champloo','Rascal Does Not Dream of Bunny Girl Senpai', 'FLCL'  ]
+const quote_ques = ['Naruto','Bleach','One Piece','Black Clover','Jujutsu Kaisen','Hunter X Hunter', 'Attack on titan' ,'Jojo',  'Chainsaw Man','Vinland Saga' ,'Demon slayer' , 'Fullmetal Alchemist','Fullmetal Alchemist Brotherhood' ,'Death Note','Your Lie in April','Monster','Steins;Gate','Steins Gate' , 'Evangelion' ,'Serial Experiments Lain','Perfect Blue','Berserk','Tokyo Ghoul','One Punch Man','Pokemon', 'Spirited Away','Samurai Champloo','Rascal Does Not Dream of Bunny Girl Senpai', 'FLCL' ]
 
 const categories = [character_ques,location_ques,quote_ques,stand_ques,title_ques]
 
 const qimg = document.getElementById("popupimg");
 const question = document.getElementById("popupque");
 
-var cat_difficulty;
-var point = 0;
+var cat_difficulty=0;
 var anime='';
 var selected='';
 var already_clicked=[];
 
-document.getElementById("questions").addEventListener("click",async function(e){
+document.getElementById("questions").addEventListener("click",async function popuprun(e){
     const ques= e.target.closest('.cque');
     document.getElementById("questions").style.pointerEvents = "none";
 
@@ -159,18 +159,43 @@ async function jojo(){
     console.log(anime + stand_name);
 }
 
+function change(){
+        document.getElementById("player1").innerHTML = "Player 1: " + point[1];
+        document.getElementById("player2").innerHTML = "Player 2: " + point[2];
+        document.getElementById("playerturn").innerHTML = "Player " + player_no + " turn";
+}
+
+var run=" ";
+
 function submitbtn(){
     answer=document.getElementById("ans").value;
     
     if (fuzzball.WRatio(answer,anime) > 80){
         alert("correct answer");
-        point = point + cat_difficulty*200;
+        point[player_no] = point[player_no] + cat_difficulty*200;
+        change();
+    }
+    else if (answer==""){
+        return;
     }
     else{
-        alert("incorrect answer");
-        point = point - cat_difficulty*200;
+        point[player_no] = point[player_no] - cat_difficulty*200;
+        player_no = 3 - player_no;
 
+        change();
+
+        document.getElementById("retry").style.display= "block";
+        document.getElementById("retry").innerHTML= "Player " + player_no + " retry";
+        document.getElementById("pass").style.display = "block";
+        document.getElementById("submit").style.display = "none";
+        if (run!=true){
+            run="true";
+            popuprun(e);
+        }
+        pass();
     }
+    run="false";
+
 
     console.log(answer + " anime is : " + anime);
     qimg.src='';
@@ -181,6 +206,8 @@ function submitbtn(){
     document.getElementById("questions").style.pointerEvents = "all";
     console.log(point);
     console.log(cat_difficulty);
+    player_no= 3-player_no;
+
 }
 
 document.getElementById("ans").addEventListener("keypress", function(event){
@@ -189,3 +216,25 @@ document.getElementById("ans").addEventListener("keypress", function(event){
         submitbtn();
     }
 });
+
+function secondplayre(){
+        submitbtn();
+}
+
+function pass(){
+        player_no = current_turn;
+
+        change();
+
+        qimg.src='';
+        question.innerHTML="";
+        document.getElementById("popup").style.display="none";
+        document.getElementById("main").style.opacity="1";
+        document.getElementById(selected).innerHTML = anime ;
+        document.getElementById("questions").style.pointerEvents = "all";
+        console.log(point);
+        console.log(cat_difficulty);
+        document.getElementById("retry").style.display= "none";
+        document.getElementById("pass").style.display = "none";
+        document.getElementById("submit").style.display = "block";
+}

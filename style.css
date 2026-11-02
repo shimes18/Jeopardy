@@ -112,3 +112,7 @@ body{
 .ov{
     margin-top: 4vh;
 }
+
+#retry , #pass{
+    display:none;
+}
