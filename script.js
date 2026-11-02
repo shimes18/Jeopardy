@@ -5,24 +5,34 @@ for (let i=1;i<=5;i++){
     document.getElementById(`c${i}q${j}`).innerHTML = j*200;
     }
 }
+var player_no=1;
 
-const character_ques= ['hello','hi'],location_ques=['fa','soul society'],stand_ques=['hermit purple', 'tusk'],title_ques=['honored one', 'hope of the universe'];
+var point1=0;
+var point2=0;
 
-const quote_ques = ['Naruto','Bleach','One Piece','Black Clover','Jujutsu Kaisen','Hunter X Hunter', 'Attack on titan' ,'Jojo',  'Chainsaw Man','Vinland Saga' ,'Demon slayer' , 'Fullmetal Alchemist','Fullmetal Alchemist Brotherhood' ,'Death Note','Your Lie in April','Monster','Steins;Gate' , 'Evangelion' ,'lain','Berserk','one punch man', 'Spirited Away','Rascal Does Not Dream of Bunny Girl Senpai', 'FLCL'  ]
+document.getElementById("player1").innerHTML = "Player 1: " + point1;
+document.getElementById("player2").innerHTML = "Player 2: " + point2;
+
+document.getElementById("playerturn").innerHTML = "Player " + player_no + " turn";
+
+const character_ques= [],location_ques=[],stand_ques=[],title_ques=[];
+
+const quote_ques = ['Naruto','Bleach','One Piece','Black Clover','Jujutsu Kaisen','Hunter X Hunter', 'Attack on titan' ,'Jojo',  'Chainsaw Man','Vinland Saga' ,'Demon slayer' , 'Fullmetal Alchemist','Fullmetal Alchemist Brotherhood' ,'Death Note','Your Lie in April','Monster','Steins;Gate' , 'Evangelion' ,'lain','Berserk','one punch man', 'Spirited Away','Samurai Champloo','Rascal Does Not Dream of Bunny Girl Senpai', 'FLCL'  ]
 
 const categories = [character_ques,location_ques,quote_ques,stand_ques,title_ques]
 
 const qimg = document.getElementById("popupimg");
 const question = document.getElementById("popupque");
 
-
+var cat_difficulty;
+var point = 0;
 var anime='';
 var selected='';
 var already_clicked=[];
 
 document.getElementById("questions").addEventListener("click",async function(e){
     const ques= e.target.closest('.cque');
-
+    document.getElementById("questions").style.pointerEvents = "none";
 
     selected= ques.id;
     already_clicked.push(selected);
@@ -37,7 +47,7 @@ document.getElementById("questions").addEventListener("click",async function(e){
 
     document.getElementById("main").style.opacity="0.4";
     const cat_name= ques.parentElement.id[1];
-    const cat_difficulty = ques.id[3];
+    cat_difficulty = ques.id[3];
     var i,min,max;
 
     const chosen = categories[cat_name-1];
@@ -47,7 +57,7 @@ document.getElementById("questions").addEventListener("click",async function(e){
     min= Math.floor(length * (cat_difficulty-1)/5);
     max= Math.floor(length * cat_difficulty/5);
     
-    page=Math.floor(Math.random() * 5) + 1 + (cat_difficulty - 1)*3;
+    page=Math.floor(Math.random() * 5) + 1 + (cat_difficulty - 1)*5;
 
     i = Math.floor(Math.random() * (max - min + 1 )) + min;
 
@@ -75,6 +85,7 @@ async function quote(q){
         const quotes= json.data.content;
         console.log(json);
         document.getElementById("popupque").textContent = quotes;
+        document.getElementById("from").innerHTML = "The character is from";
 }
 
 async function image(){
@@ -98,6 +109,8 @@ async function image(){
     console.log(anime);
     console.log(image_char_id);
     qimg.src = image_char;
+    document.getElementById("from").innerHTML = "The character is from";
+
 }
 
 async function nickname(){
@@ -116,6 +129,8 @@ async function nickname(){
     console.log(nicknames_char);
     console.log(anime);
     question.innerHTML = nicknames_char;
+    document.getElementById("from").innerHTML = "The character's name is";
+    document.getElementById("ans").placeholder = "Character Name"
 }
 
 function submitbtn(){
@@ -123,9 +138,12 @@ function submitbtn(){
     
     if (fuzzball.WRatio(answer,anime) > 80){
         alert("correct answer");
+        point = point + cat_difficulty*200;
     }
     else{
         alert("incorrect answer");
+        point = point - cat_difficulty*200;
+
     }
 
     console.log(answer + " anime is : " + anime);
@@ -134,6 +152,9 @@ function submitbtn(){
     document.getElementById("popup").style.display="none";
     document.getElementById("main").style.opacity="1";
     document.getElementById(selected).innerHTML = anime ;
+    document.getElementById("questions").style.pointerEvents = "all";
+    console.log(point);
+    console.log(cat_difficulty);
 }
 
 document.getElementById("ans").addEventListener("keypress", function(event){

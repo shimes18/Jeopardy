@@ -2,13 +2,13 @@
 
 .head{
     background-color: blue;
-    height: calc(16.7vh);
+    height: calc(13.9vh);
     width: 20vw;
     color: white;
     display:flex;
     justify-content: center;
     align-items: center;
-    font-size: 20px;
+    font-size: 100%;
     font-weight: bold;
 }
 
@@ -23,6 +23,7 @@ body{
     display: flex;
     flex-direction: column;
     position: relative;
+    gap:2px;
 }
 
 #questions{
@@ -32,17 +33,18 @@ body{
 }
 
 .cque{
-    height: calc(16.6vh - 2px);
-    width: calc(20vw - 1.6px);   
+    height: calc(14.28vh - 2px);
+    width: calc(20vw - 4.6px);   
     background-color: blue;
-    margin-top: 2px;
+    margin-bottom: 2px;
     color: gold;
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: bold;
-    font-size: clamp(10px , 30px , 30px);
+    font-size: 100%;
     border: 0px;
+    overflow-y: hidden;
 }
 
 
@@ -83,4 +85,31 @@ body{
     text-align: center;
     border-radius: 2px;
     border: none;
+}
+
+#popupimg{
+    max-height: 50vh;
+    max-width: 30vw;
+}
+
+#from{
+    font-size: 10px;
+}
+
+#c5questions{
+    margin-bottom: 0;
+}
+
+#overview{
+    display: flex;
+    flex-direction: row;
+    background-color: blue;
+    justify-content: space-between;
+    color: gold;
+    font-size: 30px;
+    height: 14.28vh;
+}
+
+.ov{
+    margin-top: 4vh;
 }
