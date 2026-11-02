@@ -16,3 +16,5 @@ AI USAGE:
 USE CASE:
 >Fun game for me to play at school
 >That's pretty much it
+
+Took the data.json file from https://github.com/ItzSylex/JojoAPI

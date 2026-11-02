@@ -75,6 +75,9 @@ document.getElementById("questions").addEventListener("click",async function(e){
     else if (cat_name==5){
         await nickname();
     }
+    else if (cat_name==4){
+        await jojo();
+    }
 })
 
 const image_char_id=0,image_char="";
@@ -131,6 +134,29 @@ async function nickname(){
     question.innerHTML = nicknames_char;
     document.getElementById("from").innerHTML = "The character's name is";
     document.getElementById("ans").placeholder = "Character Name"
+}
+
+async function jojo(){
+    const res = await fetch("data.json")
+    const json = await res.json();
+
+    const parts=['Stardust Crusaders','Diamond is Unbreakable','Vento Aureo','Stone Ocean'];
+    const selected_part = parts[Math.floor(Math.random()*4)];
+
+    const stands = json[selected_part];
+    const jojolength = stands.length;
+
+    const store_stand = Math.floor(Math.random()*jojolength);
+
+    const stand_name = stands[store_stand].stand;
+    const stand_img = stands[store_stand].stand_images[0];
+    anime = stands[store_stand].user;
+
+    qimg.src= stand_img;
+    question.innerHTML = stand_name;
+    document.getElementById("from").innerHTML = "The Stand User is";
+    document.getElementById("ans").placeholder = "Stand Name"
+    console.log(anime + stand_name);
 }
 
 function submitbtn(){
