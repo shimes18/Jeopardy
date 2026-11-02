@@ -6,10 +6,9 @@ for (let i=1;i<=5;i++){
     }
 }
 
-var player_no=1;
-var current_turn=1;
 
-var point = [0,0,0];
+var current_turn = Number(localStorage.getItem("player_no")) || 1;
+var point = JSON.parse(localStorage.getItem("point")) || [0,0,0]
 
 document.getElementById("player1").innerHTML = "Player 1: " + point[1];
 document.getElementById("player2").innerHTML = "Player 2: " + point[2];
@@ -29,6 +28,7 @@ var cat_difficulty=0;
 var anime='';
 var selected='';
 var already_clicked=[];
+
 
 document.getElementById("questions").addEventListener("click",async function popuprun(e){
     const ques= e.target.closest('.cque');
@@ -175,26 +175,28 @@ function submitbtn(){
         point[player_no] = point[player_no] + cat_difficulty*200;
         change();
     }
-    else if (answer==""){
-        return;
-    }
     else{
         point[player_no] = point[player_no] - cat_difficulty*200;
-        player_no = 3 - player_no;
-
-        change();
-
-        document.getElementById("retry").style.display= "block";
-        document.getElementById("retry").innerHTML= "Player " + player_no + " retry";
-        document.getElementById("pass").style.display = "block";
-        document.getElementById("submit").style.display = "none";
-        if (run!=true){
-            run="true";
-            popuprun(e);
+        
+        if (player_no==current_turn){
+            player_no= 3-current_turn;
+            document.getElementById("retry").style.display= "block";
+            document.getElementById("retry").innerHTML= "Player " + player_no + " retry";
+            document.getElementById("pass").style.display = "block";
+            document.getElementById("submit").style.display = "none";
+            change();
+            return;
         }
-        pass();
+        else{
+            player_no=current_turn;
+            change();
+        }
+            document.getElementById("retry").style.display= "none";
+            document.getElementById("retry").innerHTML= "Player " + player_no + " retry";
+            document.getElementById("pass").style.display = "none";
+            document.getElementById("submit").style.display="block";
     }
-    run="false";
+
 
 
     console.log(answer + " anime is : " + anime);
@@ -206,7 +208,14 @@ function submitbtn(){
     document.getElementById("questions").style.pointerEvents = "all";
     console.log(point);
     console.log(cat_difficulty);
-    player_no= 3-player_no;
+
+    if (already_clicked.length==25){
+        if (player_no==1){
+        localStorage.setItem("previouspoints",JSON.stringify(point));
+        localStorage.setItem("player_no",2);
+        location.reload;
+    }
+
 
 }
 
@@ -217,9 +226,6 @@ document.getElementById("ans").addEventListener("keypress", function(event){
     }
 });
 
-function secondplayre(){
-        submitbtn();
-}
 
 function pass(){
         player_no = current_turn;
@@ -232,8 +238,6 @@ function pass(){
         document.getElementById("main").style.opacity="1";
         document.getElementById(selected).innerHTML = anime ;
         document.getElementById("questions").style.pointerEvents = "all";
-        console.log(point);
-        console.log(cat_difficulty);
         document.getElementById("retry").style.display= "none";
         document.getElementById("pass").style.display = "none";
         document.getElementById("submit").style.display = "block";
