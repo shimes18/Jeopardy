@@ -108,6 +108,7 @@ async function quote(q){
 }
 
 async function image(){
+    qimg.style.visibility = "block";
     const res= await fetch("https://api.tenrai.org/v1/characters?page=" + page);
     const json = await res.json();
     const image_char_id= json.data[Math.floor(Math.random()*25)].mal_id;
@@ -158,6 +159,8 @@ async function nickname(){
 var whilei=0;
 var stand_img='';
 async function jojo(){
+    qimg.style.visibility = "block";
+    
     const res = await fetch("data.json")
     const json = await res.json();
 
@@ -215,6 +218,7 @@ var run=" ";
 
 function submitbtn(){
     answer=document.getElementById("ans").value;
+    qimg.style.visibility = "none";
     
     if (fuzzball.WRatio(answer,anime) > 80){
         point[player_no] = point[player_no] + cat_difficulty*200;
@@ -312,6 +316,8 @@ function pass(){
             window.location.href=window.location.href;
         }
         else{
+            localStorage.setItem("previouspoints",JSON.stringify(point));
+            localStorage.setItem("player_no", 1);
             window.location.href="finalscreen.html";
         }
     }
