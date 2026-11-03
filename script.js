@@ -31,14 +31,19 @@ var anime='';
 var selected='';
 var already_clicked=[];
 
-
+function reset(){
+    console.log("check");
+    localStorage.clear();
+    window.location.href=window.location.href;
+    change();
+}
 
 document.getElementById("questions").addEventListener("click",async function popuprun(e){
     const ques= e.target.closest('.cque');
     document.getElementById("questions").style.pointerEvents = "none";
 
 
-    selected= ques.id;
+    selected = ques.id;
 
     for (let checkclick=0;checkclick<=(already_clicked.length-1);checkclick++){
         if (already_clicked[checkclick]==selected){
@@ -48,7 +53,7 @@ document.getElementById("questions").addEventListener("click",async function pop
     }
 
 
-    already_clicked.push(selected);
+    already_clicked.push(ques);
 
     document.getElementById("popup").style.display="flex"
 
@@ -204,6 +209,7 @@ var run=" ";
 
 function submitbtn(){
     answer=document.getElementById("ans").value;
+    alert(already_clicked.length);
     
     if (fuzzball.WRatio(answer,anime) > 80){
         alert("correct answer");
@@ -227,6 +233,7 @@ function submitbtn(){
             change();
         }
 
+            player_no= current_turn;
 
             document.getElementById("retry").style.display= "none";
             document.getElementById("retry").innerHTML= "Player " + player_no + " retry";
@@ -234,6 +241,17 @@ function submitbtn(){
             document.getElementById("submit").style.display="block";
     }
 
+    if (already_clicked.length==5){
+        if (current_turn==1){
+            localStorage.setItem("previouspoints",JSON.stringify(point));
+            localStorage.setItem("player_no", 2);
+            window.location.href=window.location.href;
+        }
+        else{
+            alert("END");
+            localStorage.clear();
+        }
+    }
 
 
     console.log(answer + " anime is : " + anime);
@@ -246,17 +264,7 @@ function submitbtn(){
     console.log(point);
     console.log(cat_difficulty);
 
-    if (already_clicked.length==25){
-        if (current_turn==1){
-            localStorage.setItem("previouspoints",JSON.stringify(point));
-            localStorage.setItem("player_no", 2);
-            window.location.href=window.location.href;
-        }
-        else{
-            alert("END");
-            localStorage.clear();
-        }
-    }
+
     console.log(current_turn);
 }
 
@@ -283,3 +291,4 @@ function pass(){
         document.getElementById("pass").style.display = "none";
         document.getElementById("submit").style.display = "block";
 }
+
