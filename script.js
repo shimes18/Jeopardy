@@ -53,7 +53,7 @@ document.getElementById("questions").addEventListener("click",async function pop
     }
 
 
-    already_clicked.push(ques);
+    already_clicked.push(selected);
 
     document.getElementById("popup").style.display="flex"
 
@@ -294,5 +294,17 @@ function pass(){
         document.getElementById("retry").style.display= "none";
         document.getElementById("pass").style.display = "none";
         document.getElementById("submit").style.display = "block";
+
+        if (already_clicked.length==25){
+        if (current_turn==1){
+            localStorage.setItem("previouspoints",JSON.stringify(point));
+            localStorage.setItem("player_no", 2);
+            window.location.href=window.location.href;
+        }
+        else{
+            alert("END");
+            localStorage.clear();
+        }
+    }
 }
 
