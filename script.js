@@ -123,6 +123,10 @@ async function image(){
     const json4 = await res4.json();
     anime = json4.data.titles[2].title;
 
+    if (anime==null){
+        await image();
+    }
+
     console.log(image_char);
     console.log(anime);
     console.log(image_char_id);
@@ -240,8 +244,8 @@ function submitbtn(){
             document.getElementById("pass").style.display = "none";
             document.getElementById("submit").style.display="block";
     }
-
-    if (already_clicked.length==5){
+    console.log("current turn is " + current_turn);
+    if (already_clicked.length==25){
         if (current_turn==1){
             localStorage.setItem("previouspoints",JSON.stringify(point));
             localStorage.setItem("player_no", 2);
