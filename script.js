@@ -6,6 +6,7 @@ for (let i=1;i<=5;i++){
     }
 }
 
+var cat_name=0;
 
 var current_turn = Number(localStorage.getItem("player_no")) || 1;
 var point = JSON.parse(localStorage.getItem("previouspoints")) || [0,0,0]
@@ -58,7 +59,7 @@ document.getElementById("questions").addEventListener("click",async function pop
     document.getElementById("popup").style.display="flex"
 
     document.getElementById("main").style.opacity="0.4";
-    const cat_name= ques.parentElement.id[1];
+    cat_name= ques.parentElement.id[1];
     cat_difficulty = ques.id[3];
     var i,min,max;
 
@@ -76,8 +77,8 @@ document.getElementById("questions").addEventListener("click",async function pop
 
 
     if (cat_name==3){
-        anime = quote_ques[i];
-        quote();
+         anime = quote_ques[i];
+        await quote();
     }
     else if (cat_name==1){    
         question.innerHTML="LOADING.....";
@@ -214,16 +215,16 @@ var run=" ";
 
 function submitbtn(){
     answer=document.getElementById("ans").value;
-    alert(already_clicked.length);
     
     if (fuzzball.WRatio(answer,anime) > 80){
-        alert("correct answer");
         point[player_no] = point[player_no] + cat_difficulty*200;
+        player_no=current_turn;
+        document.getElementById("submit").style.display = "block";
+        document.getElementById("retry").style.display= "none";
         change();
     }
     else{
         point[player_no] = point[player_no] - cat_difficulty*200;
-        
         if (player_no==current_turn){
             player_no= 3-current_turn;
             document.getElementById("retry").style.display= "block";
@@ -242,7 +243,6 @@ function submitbtn(){
 
             document.getElementById("retry").style.display= "none";
             document.getElementById("retry").innerHTML= "Player " + player_no + " retry";
-            document.getElementById("pass").style.display = "none";
             document.getElementById("submit").style.display="block";
     }
     console.log("current turn is " + current_turn);
@@ -268,7 +268,8 @@ function submitbtn(){
     console.log(point);
     console.log(cat_difficulty);
 
-
+    player_no = current_turn;
+    
     console.log(current_turn);
 }
 
@@ -281,6 +282,16 @@ document.getElementById("ans").addEventListener("keypress", function(event){
 
 
 function pass(){
+
+        if (player_no==current_turn){
+            player_no=3-player_no;
+            document.getElementById("retry").style.display="block";
+            document.getElementById('retry').innerHTML = "Player "+ player_no + " try";
+            document.getElementById("submit").style.display="none";
+            change();
+            return;
+        }
+
         player_no = current_turn;
 
         change();
@@ -292,7 +303,6 @@ function pass(){
         document.getElementById(selected).innerHTML = anime ;
         document.getElementById("questions").style.pointerEvents = "all";
         document.getElementById("retry").style.display= "none";
-        document.getElementById("pass").style.display = "none";
         document.getElementById("submit").style.display = "block";
 
         if (already_clicked.length==25){
@@ -302,9 +312,7 @@ function pass(){
             window.location.href=window.location.href;
         }
         else{
-            alert("END");
-            localStorage.clear();
+            window.location.href="finalscreen.html";
         }
     }
 }
-

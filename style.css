@@ -3,7 +3,7 @@
 .head{
     background-color: blue;
     height: calc(13.9vh);
-    width: 20vw;
+    width: 20vw ;
     color: white;
     display:flex;
     justify-content: center;
@@ -34,7 +34,7 @@ body{
 
 .cque{
     height: calc(14.28vh - 2px);
-    width: calc(20vw - 4.6px);   
+    width: calc(20vw - 5.3px);   
     background-color: blue;
     margin-bottom: 2px;
     color: gold;
@@ -110,10 +110,10 @@ body{
 }
 
 .ov{
-    margin-top: 4vh;
+    margin-top: 5vh;
 }
 
-#retry , #pass{
+#retry {
     display:none;
 }
 
