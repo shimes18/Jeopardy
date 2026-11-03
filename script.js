@@ -154,7 +154,8 @@ async function nickname(){
     document.getElementById("from").innerHTML = "The character's name is";
     document.getElementById("ans").placeholder = "Character Name"
 }
-
+var whilei=0;
+var stand_img='';
 async function jojo(){
     const res = await fetch("data.json")
     const json = await res.json();
@@ -167,15 +168,15 @@ async function jojo(){
 
     const store_stand = Math.floor(Math.random()*jojolength);
 
-    const stand_name = stands[store_stand].stand;
-    const stand_img = stands[store_stand].stand_images[0];
-    anime = stands[store_stand].user;
+    anime = stands[store_stand].stand;
+
+        stand_img = stands[store_stand].stand_images[0];
+    user = stands[store_stand].user;
 
     qimg.src= stand_img;
-    question.innerHTML = stand_name;
-    document.getElementById("from").innerHTML = "The Stand User is";
+    qimg.alt = "Stand user is "+user;
+    document.getElementById("from").innerHTML = "The Stand  is";
     document.getElementById("ans").placeholder = "Stand Name"
-    console.log(anime + stand_name);
 }
 
 async function description(){
@@ -252,8 +253,7 @@ function submitbtn(){
             window.location.href=window.location.href;
         }
         else{
-            alert("END");
-            localStorage.clear();
+            window.location.href = "finalscreen.html";
         }
     }
 
