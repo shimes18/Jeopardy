@@ -322,3 +322,12 @@ function pass(){
         }
     }
 }
+
+
+function okay(){
+    var category_no=0;
+    document.getElementById("onlyone").style.display="none";
+    document.getElementById("ok").style.display="none";
+    category_no = (Math.floor(Math.random()*categories.length));
+    document.getElementById("finalcategory").textContent="Category is : " + categories[category_no] ;
+}
