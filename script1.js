@@ -254,3 +254,8 @@ function changed(){
         document.getElementById("temphide").style.display='flex';
         document.getElementById("changerequest").style.display='none';
 }
+
+function home(){
+    localStorage.clear();
+    window.location.href= 'index.html';
+}
