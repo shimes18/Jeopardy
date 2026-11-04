@@ -262,6 +262,8 @@ function submitbtn(){
             window.location.href=window.location.href;
         }
         else{
+            localStorage.setItem("previouspoints",JSON.stringify(point));
+            localStorage.setItem("player_no", 2);
             window.location.href = "finalscreen.html";
         }
     }

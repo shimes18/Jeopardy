@@ -72,19 +72,32 @@
             }
             #cantpr{
                 font-size: 25px;
+                display:none;
             }
             #balances{
                 display:flex;
                 justify-content: space-around;
             }
+            #winner{
+                text-align: center;
+                font-weight: bold;
+                color: gold;
+                text-shadow: 0 0 10px gold , 0 0 20px gold , 0 0 40px gold ;
+                margin-bottom: 40px;
+            }
+            #homebut{
+                display:flex;
+                align-items: center;
+                justify-content: center;
+            }
         </style>
     </head>
     <body>
         <div id="something">
-        <div id="parentbalance"><div id="balance"></div></div>
-        <div id="parentdec"><div id="playerdeclaration"></div>
-        <input id="playerinput" type="number" min="0"><br>
-        <button id="submit" onclick="submit()">Submit</button></div>
+            <div id="parentbalance"><div id="balance"></div></div>
+            <div id="parentdec"><div id="playerdeclaration"></div>
+            <input id="playerinput" type="number" min="0"><br>
+            <button id="submit" onclick="submit()">Submit</button></div>
         </div>
         <div id="whileswitch">
             <div id="switch">Please look away and let the other person wager!! REMEMBER DO NOT LOOK</div><br>
@@ -97,13 +110,13 @@
                 <div id="p1"></div>
                 <div id="p2"></div>
             </div>
-            <button id="home" onclick="home()">HOME</button>
+            <div id="homebut"><button id="home" onclick="home()">HOME</button></div>
         </div>
     <script>
 
         let winner = "";
-        point = JSON.parse(localStorage.getItem("previouspoints"));
-        player_no = localStorage.getItem("player_no");
+        let point = JSON.parse(localStorage.getItem("previouspoints"));
+        let player_no = localStorage.getItem("player_no");
         document.getElementById("p1").innerHTML= "Player 1: " + point[1];
         document.getElementById("p2").innerHTML= "Player 2: " + point[2];
         if (point[1]>0 && point[2]>0){
