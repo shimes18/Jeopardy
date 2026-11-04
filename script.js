@@ -108,7 +108,7 @@ async function quote(q){
 }
 
 async function image(){
-    qimg.style.visibility = "block";
+    qimg.style.display = "block";
     const res= await fetch("https://api.tenrai.org/v1/characters?page=" + page);
     const json = await res.json();
     const image_char_id= json.data[Math.floor(Math.random()*25)].mal_id;
@@ -159,7 +159,7 @@ async function nickname(){
 var whilei=0;
 var stand_img='';
 async function jojo(){
-    qimg.style.visibility = "block";
+    qimg.style.display = "block";
     
     const res = await fetch("data.json")
     const json = await res.json();
@@ -195,8 +195,13 @@ async function description(){
 
     const descs = full_desc_char.split(".").filter(Boolean);
     const change = anime.split(",").filter(Boolean);
-    var chosen_desc= descs[Math.floor(Math.random()*descs.length-1)].replaceAll(change[0]," [NAME]");
-    chosen_desc= chosen_desc.replaceAll(change[1]," [NAME]");
+    if (change!=undefined){
+        var chosen_desc= descs[Math.floor(Math.random()*descs.length-1)].replaceAll(change[0]," [NAME]");
+        chosen_desc= chosen_desc.replaceAll(change[1]," [NAME]");
+    }
+    else{
+        chosen_desc=desc;
+    }
 
 
 
@@ -275,6 +280,7 @@ function submitbtn(){
     player_no = current_turn;
     
     console.log(current_turn);
+    qimg.style.display= "none";
 }
 
 document.getElementById("ans").addEventListener("keypress", function(event){
@@ -286,7 +292,7 @@ document.getElementById("ans").addEventListener("keypress", function(event){
 
 
 function pass(){
-
+    
         if (player_no==current_turn){
             player_no=3-player_no;
             document.getElementById("retry").style.display="block";
@@ -308,6 +314,7 @@ function pass(){
         document.getElementById("questions").style.pointerEvents = "all";
         document.getElementById("retry").style.display= "none";
         document.getElementById("submit").style.display = "block";
+    qimg.style.display= "none";
 
         if (already_clicked.length==25){
         if (current_turn==1){
