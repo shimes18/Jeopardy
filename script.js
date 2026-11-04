@@ -195,7 +195,7 @@ async function description(){
 
     const descs = full_desc_char.split(".").filter(Boolean);
     const change = anime.split(",").filter(Boolean);
-    var chosen_desc= descs[Math.floor(Math.random()*descs.length)].replaceAll(change[0]," [NAME]");
+    var chosen_desc= descs[Math.floor(Math.random()*descs.length-1)].replaceAll(change[0]," [NAME]");
     chosen_desc= chosen_desc.replaceAll(change[1]," [NAME]");
 
 
@@ -321,13 +321,4 @@ function pass(){
             window.location.href="finalscreen.html";
         }
     }
-}
-
-
-function okay(){
-    var category_no=0;
-    document.getElementById("onlyone").style.display="none";
-    document.getElementById("ok").style.display="none";
-    category_no = (Math.floor(Math.random()*categories.length));
-    document.getElementById("finalcategory").textContent="Category is : " + categories[category_no] ;
 }

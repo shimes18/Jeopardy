@@ -14,7 +14,7 @@
                 font-family: 'Montserrat', sans-serif;
 
             }
-            #finalanswer , #finalsubmit{
+            #finalanswer , #finalsubmit , #didntload{
                 display:none;
             }
             #temphide{
@@ -50,21 +50,66 @@
                 border-color: whitesmoke;
             }
 
+            #question{
+                background-color: black;
+                width: 90vw;
+            }
+            #image{
+                height: 200px;
+                display:none;
+            }
+
+            #describe{
+                font-size: 10px;
+            }
+            #turn{
+                text-align: center;
+                color: gold;
+                font-size : 30px;
+            }
+            #answerreveal{
+                color: pink ;
+                text-align:center;
+                font-size: 20px;
+            }
+            #verdict{
+                color:gold;
+                font-size: 30px;
+                text-align:center;
+                margin-top: 80px;
+                text-shadow: 0 0 10px gold , 0 0 20px gold , 0 0 40px gold ;
+            }
+            #verdictbalance{
+                margin-top: 40px;
+                display:flex;
+                justify-content: space-evenly;
+                font-size: 15px;
+            }
         </style>
     </head>
     <body>
+        <div id="turn"></div>
         <div id="temphide">
-            <div id="onlyone">PLEASE ONLY ONE PLAYER LOOK AT THE SCREEN!!</div>
+            <div id="onlyone">PLEASE ONLY PLAYER ONE LOOK AT THE SCREEN!!</div>
             <button id="ok" onclick="okay()">Okay</button>
             <div id="finalcategory"></div>
-            <div id="question"></div>
+            <img id="image">
+            <div id="question"></div><br>
+            <div id="describe"></div>
             <input id="finalanswer">
-            <button id="finalsubmit" onclick="finalsubmit()"></button>
+            <button id="finalsubmit" onclick="finalsubmit()">SUBMIT</button>
+            <button id="didntload" onclick="didntload()">Didnt load</button>
+
         </div>
         <div id="changerequest">
-            <div id="change">Please look away and let other player play!!</div>
-            <button id="changed" onclick="changed()"></button>
+            <div id="change">OTHER PLAYER TURN NOW!!</div>
+            <button id="changed" onclick="changed()">OKAY</button>
         </div>
-        <script type="text/javascript" src="script.js" async defer></script>
+        <div id="answerreveal"></div>
+        <div id="verdict"></div>
+        <div id="verdictbalance"><div id='vb1'></div><div id='vb2'></div></div>
+        <button id="home" href="index.html"></button>
+        <script src="https://cdn.jsdelivr.net/npm/fuzzball@2.2.6/dist/fuzzball.umd.min.js"></script>
+        <script type="text/javascript" src="script1.js" async defer></script>
     </body>
 </html>
