@@ -237,3 +237,20 @@ function finalsubmit(){
     okay();
 }
 
+function didntload(){
+    i=Math.floor(Math.random()*quote_ques.length);
+    img_smth = Math.floor(Math.random()*25);
+    page = Math.floor(Math.random()*20)+1;
+    nicsmth = Math.floor(Math.random()*25);
+    jojosmth= Math.floor(Math.random()*4);
+    jojosmth2= Math.floor(Math.random()*20);
+    descsmth=Math.floor(Math.random()*10);
+    descsmth2 = Math.floor(Math.random()*9);
+    anothervar = Math.floor(Math.random()*5);
+    okay();
+}
+
+function changed(){
+        document.getElementById("temphide").style.display='flex';
+        document.getElementById("changerequest").style.display='none';
+}
