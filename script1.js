@@ -257,5 +257,5 @@ function changed(){
 
 function home(){
     localStorage.clear();
-    window.location.href= 'index.html';
+    window.location.href= 'https://shimes18.github.io/Jeopardy/index.html';
 }

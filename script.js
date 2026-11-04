@@ -264,7 +264,7 @@ function submitbtn(){
         else{
             localStorage.setItem("previouspoints",JSON.stringify(point));
             localStorage.setItem("player_no", 2);
-            window.location.href = "finalscreen.html";
+            window.location.href = "https://shimes18.github.io/Jeopardy/finalscreen.html";
         }
     }
 
@@ -327,7 +327,7 @@ function pass(){
         else{
             localStorage.setItem("previouspoints",JSON.stringify(point));
             localStorage.setItem("player_no", 1);
-            window.location.href="finalscreen.html";
+            window.location.href="https://shimes18.github.io/Jeopardy/finalscreen.html";
         }
     }
 }
