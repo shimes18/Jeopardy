@@ -11,65 +11,72 @@
             @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');   
 
 
-body{
-    background-color: blue;
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    width: 100vw;
-    font-family: 'Montserrat', sans-serif;
-    color: whitesmoke;
-    font-size: 20px;
-}
+            body{
+                background-color: blue;
+                margin: 0;
+                padding: 0;
+                height: 100vh;
+                width: 100vw;
+                font-family: 'Montserrat', sans-serif;
+                color: whitesmoke;
+                font-size: 20px;
+            }
 
-#parentbalance{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 30px;
-    margin-bottom: 30vh;
-}
-#parentdec{
-    font-size: 30px;
-    text-align: center;
-    color: gold;
-}
-#parentdec input{
-    border-radius: 5px;
-    height:30px;
-}
+            #parentbalance{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 30px;
+                margin-bottom: 30vh;
+            }
+            #parentdec{
+                font-size: 30px;
+                text-align: center;
+                color: gold;
+            }
+            #parentdec input{
+                border-radius: 5px;
+                height:30px;
+            }
 
-#submit, #change{
-    margin-top: 10px;
-    background-color: blue;
-    border-radius: 5px;
-    border-width: 2px;
-    border-color: whitesmoke;
-    color:whitesmoke;
-    height: 30px;
-    width:100px;
-    transition: all 0.3s ease-in-out;
-    border-style: solid;
-}
-#change{
-    width: 150px;
-    height: 40px;
-}
+            #submit, #change , #home{
+                margin-top: 10px;
+                background-color: blue;
+                border-radius: 5px;
+                border-width: 2px;
+                border-color: whitesmoke;
+                color:whitesmoke;
+                height: 30px;
+                width:100px;
+                transition: all 0.3s ease-in-out;
+                border-style: solid;
+            }
+            #change{
+                width: 150px;
+                height: 40px;
+            }
 
-#submit:hover , #change:hover{
-    transform: scale(1.1);
-    background-color: whitesmoke;
-    color: blue;
-}
+            #submit:hover , #change:hover , #home:hover{
+                transform: scale(1.1);
+                background-color: whitesmoke;
+                color: blue;
+            }
 
-#whileswitch{
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    width: 100vw;
-}
+            #whileswitch{
+                display: none;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                height: 100vh;
+                width: 100vw;
+            }
+            #cantpr{
+                font-size: 25px;
+            }
+            #balances{
+                display:flex;
+                justify-content: space-around;
+            }
         </style>
     </head>
     <body>
@@ -83,12 +90,23 @@ body{
             <div id="switch">Please look away and let the other person wager!! REMEMBER DO NOT LOOK</div><br>
             <button id="change" onclick="change()">Next player continue</button>
         </div>
+
+        <div id="cantpr">
+            <div id="winner"></div>
+            <div id="balances">
+                <div id="p1"></div>
+                <div id="p2"></div>
+            </div>
+            <button id="home" onclick="home()">HOME</button>
+        </div>
     <script>
 
         let winner = "";
         point = JSON.parse(localStorage.getItem("previouspoints"));
         player_no = localStorage.getItem("player_no");
-
+        document.getElementById("p1").innerHTML= "Player 1: " + point[1];
+        document.getElementById("p2").innerHTML= "Player 2: " + point[2];
+        if (point[1]>0 && point[2]>0){
         function inputwager(){
             document.getElementById("playerdeclaration").innerHTML= "Player " + player_no + " enter how much you want to wager";
             document.getElementById("balance").innerHTML = "Balance: " + point[player_no];
@@ -127,8 +145,30 @@ body{
             document.getElementById("something").style.display = "flex";
             document.getElementById("something").style.flexDirection = "column";
         }
+    }
+    else{
+        document.getElementById("something").style.display="none";
+        document.getElementById("whileswitch").style.display = "none";
 
+        let cap=document.getElementById("cantpr")
 
+        cap.style.display = "flex";
+        cap.style.flexDirection ="column";
+
+        if (point[1]>0){
+            document.getElementById("winner").innerHTML = "Player 1 wins!!!";
+        }
+        else if (point[2]>0){
+            document.getElementById("winner").innerHTML = "Player 2 wins!!!";
+        }
+        else{
+            document.getElementById("winner").innerHTML = "No one wins!!!";
+        }
+    }
+
+    function home(){
+        window.location.href="index.html"
+    }
     </script>
     </body>
 </html>
