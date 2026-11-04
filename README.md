@@ -5,6 +5,9 @@ It's a web based Jeopardy like game where question pops up on the screen whose d
 
 
 **IN THE FINAL JEOPARDY, SOMETIMES QUESTION DONT SHOW UP DUE TO API FAULT , PLEASE CLICK DIDNT LOAD IN THAT SITUATION.**
+
+**THERES A RESET BUTTON BELOW THE TABLE IN HOMESCREEN INCASE YOU NEED TO RESET**
+
 Tools used to make this:
 >HTML
 >CSS
@@ -18,6 +21,11 @@ AI USAGE:
 USE CASE:
 >Fun game for me to play at school
 >That's pretty much it
+
+DIFFICULTY FACED:
+>Some apis were really hard to handle at times
+>The tiles were inconsistent with their placement, wasted some time almost daily to fix them
+>Forgot to add pass button at start , caused a lot of trouble when trying to add it later on
 
 Took the data.json file from https://github.com/ItzSylex/JojoAPI since the api itself doesn't work now
 
